@@ -24,19 +24,22 @@ class MoviesController < ApplicationController
       session[:@selected_ratings] = @all_ratings
     end
     
-      
     case session[:sort_state]
     when 'title'
       if session[:@selected_ratings]
         @movies = Movie.order(:title).where(rating: session[:@selected_ratings].keys)
+        @titleHilite = 'hilite'
       else
         @movies = Movie.order(:title)
+        @titleHilite = 'hilite'
       end
     when 'date'
       if session[:@selected_ratings]
         @movies = Movie.order(:release_date).where(rating: session[:@selected_ratings].keys)
+        @dateHilite = 'hilite'
       else
         @movies = Movie.order(:release_date)
+        @dateHilite = 'hilite'
       end
     when nil
       if session[:@selected_ratings]
