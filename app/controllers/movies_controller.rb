@@ -11,6 +11,7 @@ class MoviesController < ApplicationController
   end
 
   def index
+
     sort_state = params[:sort]
     case sort_state
     when 'title'
@@ -20,6 +21,15 @@ class MoviesController < ApplicationController
     when nil
       @movies = Movie.all
     end
+
+    @all_ratings = Movie.uniq.pluck(:rating)
+    
+    @selected_ratings = params[:ratings]
+    
+    if @selected_ratings 
+      @movies = Movie.where(rating: @selected_ratings.keys)
+    end
+
   end
 
   def new
