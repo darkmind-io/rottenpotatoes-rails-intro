@@ -21,7 +21,7 @@ class MoviesController < ApplicationController
     if params[:ratings] != session[:@selected_ratings] && !params[:ratings].nil? then 
       session[:@selected_ratings] = params[:ratings] 
     elsif session[:@selected_ratings].nil? then
-      session[:@selected_ratings] = @all_ratings
+      session[:@selected_ratings] = {}
     end
     
     case session[:sort_state]
